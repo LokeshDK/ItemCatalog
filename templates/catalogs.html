@@ -1,0 +1,82 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+<title>
+	Catalogs
+</title>
+	<div class="row divider blue">
+		<div class="col-md-8"></div>
+	</div>
+	<div class="row banner main">
+		<div class="col-md-1"></div>
+		<div class="col-md-11 padding-top">
+			<h1 class="sidebyside">Catalogs</h1>
+			<h1 class="sidebyside setmargin">Recent Items</h1>
+		</div>
+	</div>
+
+<div class = 'flash'>
+		      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+          
+        <ul>
+        {% for message in messages %}
+            <li> <strong> {{ message }} </strong> </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+
+</div>
+	
+	<div class="row padding-top padding-bottom">
+		<div class="col-md-1"></div>
+		<div class="col-md-10 padding-none">
+			<a href="{{url_for('newCatalog')}}">
+				<button class="btn btn-default" id="new-catalog">
+					<span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>Add Catalog
+				</button>
+			</a>
+		</div>
+		<div class="col-md-1"></div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-1"></div>
+		abc
+	<div>
+	
+	
+	{% for catalog in catalogs %}
+	
+		<div class="row">
+			<div class="col-md-1"></div>
+				<div class="sidebyside col-md-1">
+					<a href = "{{url_for('showItems', catalog_name = catalog.name)}}">
+						<div class="col-md-10 catalog-list sidebyside">
+							<h3>{{catalog.name}}</h3>
+						</div>
+					</a>
+				</div>
+			<div class="col-md-1"></div>
+		</div>
+	{% endfor %}
+				
+				
+
+	{% for item in items %}
+	
+		<div class="row">
+			<div class="col-md-1"></div>
+				<div class="sidebyside setmargin">
+					<a href = "{{url_for('showItems', catalog_name = item.category)}}">
+						<div class="col-md-10 catalog-list sidebyside itemwidth">
+							<h3 class="sidebyside setmargin">{{item.name}}</h3> ({{item.category}})
+						</div>
+					</a>
+				</div>
+			<div class="col-md-1"></div>
+		</div>
+	{% endfor %}
+{% endblock %}
+
