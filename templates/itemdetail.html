@@ -1,0 +1,31 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+
+<title>
+	{{ item.name }}
+</title>
+
+<div class="row divider green">
+		<div class="col-md-12"></div>
+	</div>
+	<div class="row banner menu">
+		<div class="col-md-11 col-md-offset-1 padding-none">
+			<h1>{{item.name}}</h1>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-6 col-md-offset-1 padding-top btn-group">
+						
+			<label for="description">Description:</label>
+			</br>
+			<p>{{item.description}}</p>
+			
+			</br>
+			<a href='{{url_for('editItem', catalog_name = catalog.name, item_name=item.name) }}'>Edit</a>
+			|
+			<a href='{{url_for('deleteItem', catalog_name = catalog.name, item_name=item.name ) }}'>Delete</a>
+		</div>
+	</div>
+{% endblock %}
