@@ -380,7 +380,6 @@ def showItems(catalog_name):
             return render_template('item.html', items=items, creator=catalog.user_id)
 
 def getCatalogid(category_name):
-    print category_name
     catalog = session.query(Catalog).filter_by(name=category_name).one()
     return catalog.id
 
@@ -405,9 +404,22 @@ def newItem(catalog_name):
     else:
         return render_template('newitem.html', catalog_name=catalog_name, allcatalogs=allcatalogs)
 
+@app.route('/catalog/<catalog_name>/item/<item_name>')
+def itemDetail(catalog_name, item_name):
+    item = session.query(catalogItem).filter_by(name=item_name).one()
+    catalog = session.query(Catalog).filter_by(name=catalog_name).one()
+    try:
+        if 'username' not in login_session:
+            return render_template('publicitemdetail.html', item=item, catalog=catalog)
+        else:
+            return render_template('itemdetail.html', item=item, catalog=catalog)
+    except NoResultFound:
+        if 'username' not in login_session:
+            return render_template('publicitemdetail.html', item=item)
+        else:
+            return render_template('itemdetail.html', item=item)
+
 # Edit a menu item
-
-
 @app.route('/catalog/<catalog_name>/item/<item_name>/edit', methods=['GET', 'POST'])
 def editItem(catalog_name, item_name):
     if 'username' not in login_session:

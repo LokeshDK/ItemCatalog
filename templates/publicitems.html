@@ -8,20 +8,14 @@
 	<div class="row banner menu">
 		<div class="col-md-11 col-md-offset-1 padding-none">
 			<h1>{{ catalog.name }}
-			<figure class="creator">
+			<figure class="creator padding-top">
 				<figcaption>{{ creator.name }}</figcaption>
 			</figure>
 			</h1>
 
 		</div>
 	</div>
-	<div class="row padding-top padding-bottom">
-		<div class="col-md-1"></div>
-		<div class="col-md-11 padding-none">
-			
-		</div>
-		<div class="col-md-7"></div>
-	</div>
+	
 	<div class="row">
 		<div class="col-md-12">
 			{% with messages = get_flashed_messages() %}
@@ -41,12 +35,10 @@
 			<div class="col-md-3">
 					{% for i in items %}
 						{% if i.category ==  catalog.name  %}
-							<div class="menu-item">
-								<h3>{{i.name}}</h3>
-								<p>{{i.description}}</p>
-								<a href='{{url_for('editItem', catalog_name = catalog.name, item_name=i.name ) }}'>Edit</a> | 
-								<a href='{{url_for('deleteItem', catalog_name = catalog.name, item_name=i.name ) }}'>Delete</a>
-							</div>
+								<a href = "{{url_for('itemDetail', catalog_name = catalog.name, item_name=i.name)}}">
+									<div class="col-md-10 catalog-list sidebyside">
+										<h3>{{i.name}}</h3>
+									</div>
 						{% endif %}
 					{% endfor %}
 			</div>
