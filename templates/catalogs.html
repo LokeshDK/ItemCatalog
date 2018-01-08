@@ -43,10 +43,27 @@
 	
 	<div class="row">
 		<div class="col-md-1"></div>
-		abc
-	<div>
+		{% for catalog in catalogs %}
+			<a href = "{{url_for('showItems', catalog_name = catalog.name)}}">
+				<div class="col-md-10 catalog-list sidebyside setmargin">
+					<h3>{{catalog.name}}</h3>
+				</div>
+			</a>
+			
+			<div class="sidebyside setmargin">
+				{% for item in items %}
+					<a href = "{{url_for('itemDetail', catalog_name = item.category, item_name=item.name)}}">
+						<div class="col-md-10 catalog-list sidebyside itemwidth">
+							<h3 class="sidebyside setmargin">{{item.name}}</h3> ({{item.category}})
+						</div>
+					</a>
+				{% endfor %}
+			</div>
+			
+		{% endfor %}
+	</div>
 	
-	
+	<p>********************************************************</p>
 	{% for catalog in catalogs %}
 	
 		<div class="row">
